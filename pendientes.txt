@@ -1,0 +1,9 @@
+
+
+------- ****** Al inciar el wizard el programa debe  ****** -------
+--BD
+* Crear usaurio admin por default  admin  mutation -> AddUserAdmin
+* Contraseña por default de nuevos usuarios es "123456Az"
+* Crear literal I.V.A con valor 16 por default y regla Genaral que las contiene -> AddRuleGeneral
+* Crear Perfil de Cliente General -> AddClientGeneralPerfil
+
