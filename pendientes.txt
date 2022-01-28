@@ -1,4 +1,6 @@
 revizar wz2 y wz5 que se duplican al ejecutar varias veces.
+FALTA UPDATEmODULE
+FALTA TODO PERFILuSER
 ------- ****** Al inciar el wizard el programa debe  ****** -------
 --BD
 * Crear modulos de permisos de usuarios (wz1_createModulesList)

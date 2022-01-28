@@ -4,14 +4,9 @@ import {
   Query,
   Mutation,
   Arg,
-  Args,
-  ConflictingDefaultWithNullableError,
+  Args
 } from "type-graphql";
 import { DocumentType } from "@typegoose/typegoose";
-
-import { Types } from "mongoose";
-
-import { objectLiterals } from "../../../DefaultSettings/defaultValues";
 
 import {
   RuleModel,
@@ -105,7 +100,7 @@ export class RuleResolver {
       return false;
     }
   }
-  
+
 }
 
 async function searchIdLiterals(): Promise<string[]> {

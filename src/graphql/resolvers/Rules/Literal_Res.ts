@@ -2,8 +2,6 @@
 import { Resolver, Query, Mutation, Arg, Args, Int } from "type-graphql";
 import { DocumentType } from "@typegoose/typegoose";
 
-import { ObjectId } from "mongoose";
-
 import { objectLiterals } from "../../../DefaultSettings/defaultValues";
 
 import {
