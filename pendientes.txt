@@ -1,9 +1,10 @@
-
-
+revizar wz2 y wz5 que se duplican al ejecutar varias veces.
 ------- ****** Al inciar el wizard el programa debe  ****** -------
 --BD
-* Crear usaurio admin por default  admin  mutation -> AddUserAdmin
-* Contraseña por default de nuevos usuarios es "123456Az"
-* Crear literal I.V.A con valor 16 por default y regla Genaral que las contiene -> AddRuleGeneral
-* Crear Perfil de Cliente General -> AddClientGeneralPerfil
+* Crear modulos de permisos de usuarios (wz1_createModulesList)
+* Crear perfiles de usuarios (wz2_createPerfilUserList)
+* Crear usaurio admin por default  admin  mutation -> AddUserAdmin (wz3_createUserAdmin)
+***** Contraseña por default de nuevos usuarios es "123456Az"
+* Crear literal I.V.A con valor 16 por default y regla Genaral que las contiene (wz4_createLiteralList)
+* Crear Perfil de Cliente General -> AddClientGeneralPerfil  (wz5_addRuleGeneral)
 
