@@ -1,12 +1,21 @@
-revizar wz2 y wz5 que se duplican al ejecutar varias veces.
-FALTA UPDATEmODULE
-FALTA TODO PERFILuSER
+* Crear atributos de productos
+* Crear inventario de productos
+
+
+
+--------******* Archivos pendientes de finalizar y que no se van a usar aún ******--------
+ModuleRes (update, delete)
+PerfilUser falta casi todo.
+
+
 ------- ****** Al inciar el wizard el programa debe  ****** -------
 --BD
 * Crear modulos de permisos de usuarios (wz1_createModulesList)
 * Crear perfiles de usuarios (wz2_createPerfilUserList)
 * Crear usaurio admin por default  admin  mutation -> AddUserAdmin (wz3_createUserAdmin)
-***** Contraseña por default de nuevos usuarios es "123456Az"
+>>>>>>> Contraseña por default de nuevos usuarios es "123456Az"
 * Crear literal I.V.A con valor 16 por default y regla Genaral que las contiene (wz4_createLiteralList)
-* Crear Perfil de Cliente General -> AddClientGeneralPerfil  (wz5_addRuleGeneral)
-
+* Crear Regla General -> AddClientGeneralPerfil  (wz5_addRuleGeneral)
+* Crear Perfil General de cliente (wz6_AddClientGeneralPerfil)
+* Crear Cliente General (wz7_AddClienteGeneral)
+* Crear categoria de producto 'Sin categoría'  (wz8_AddCategoryMain)

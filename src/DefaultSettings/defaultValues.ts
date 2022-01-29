@@ -14,7 +14,12 @@ export const objectLiterals : Array<InputLiteral> = [
             name: 'Precio Costo',
             value: 1,
             editable: false
-      }
+      },
+      {
+        name: 'Precio Venta',
+        value: 1,
+        editable: false
+  }
 ]
 
 
@@ -92,3 +97,9 @@ export const ClienteGeneral = {
       credit:0,
       perfilName: 'General'
 }
+
+/****** ---------------------------------------------*******/
+/****** --- Categoría de Producto Principal --*******/
+/****** ---------------------------------------------*******/
+
+export const categoryMain = "Sin categoría"

@@ -90,11 +90,14 @@ export class RuleResolver {
   @Mutation((returns) => Boolean)
   async wz5_addRuleGeneral(): Promise<Boolean> {
     try {
-      const literal = await searchIdLiterals();
-      const rule = new RuleModel();
       const name: string = "General";
-      const arrayOperators: Array<string> = ["*"];
-      await rule.CreateUpdateRule({ name, literal, arrayOperators });
+      const existRule = await RuleExistInDB(name)
+      if (!existRule){
+        const literal = await searchIdLiterals();
+        const rule = new RuleModel();      
+        const arrayOperators: Array<string> = [];
+        await rule.CreateUpdateRule({ name, literal, arrayOperators });
+      }
       return true;
     } catch (error) {
       return false;
@@ -105,7 +108,7 @@ export class RuleResolver {
 
 async function searchIdLiterals(): Promise<string[]> {
   try {
-    const literals = await LiteralModel.find({});
+    const literals = await LiteralModel.find({name:"Precio Venta"});
     const arrayString = literals.map((data) => {
       return data._id.valueOf();
     });

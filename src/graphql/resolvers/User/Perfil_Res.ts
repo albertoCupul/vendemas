@@ -62,14 +62,12 @@ export class UserPerfilResolver {
           const module =  await ModuleModel.findOne({ name: modulo }).exec();
           return module;
         })      
-        await Promise.all(modelos).then((arrayModelos) => {        
-          //const alreadyExist: boolean = await existInDBPerfil(namePerfil);
-          //if (!alreadyExist) {
+        await Promise.all(modelos).then(async (arrayModelos) => {        
+          const alreadyExist: boolean = await existInDBPerfil(namePerfil);
+          if (!alreadyExist) {
             let perfil = new PerfilModel();
-            perfil.CreateNew({ namePerfil, arrayModelos });
-            console.log('creando');
-            
-          //}
+            perfil.CreateNew({ namePerfil, arrayModelos });            
+          }
         });
       });
       return true;

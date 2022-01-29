@@ -59,13 +59,16 @@ export class ClientPerfilResolver{
   }
   
   @Mutation(type => Boolean)
-  async AddClientGeneralPerfil () : Promise<Boolean>{
+  async wz6_AddClientGeneralPerfil () : Promise<Boolean>{
     const name = ClienteGeneralPerfil.name
     const rule = await RuleModel.findOne({name:ClienteGeneralPerfil.ruleName})
     let response : boolean = false
     if (rule){
-      const perfil = new PerfilModel()
-      await perfil.CreateAndUpdate({name, rule})
+      const existPerfil = await PerfilModel.findOne({name})
+      if (!existPerfil){
+        const perfil = new PerfilModel()
+        await perfil.CreateAndUpdate({name, rule})
+      }
       response = true
     }
     return response  
