@@ -1,4 +1,3 @@
-* Crear atributos de productos
 * Crear inventario de productos
 
 

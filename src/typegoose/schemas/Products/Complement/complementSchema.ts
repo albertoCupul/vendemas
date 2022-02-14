@@ -32,7 +32,8 @@ export class UpdateComplement extends InputComplement{
 
 @ObjectType()
 export class ComplementMain extends ComplementBase{
-	
+
+
 	public async CreateUpdateComplement (this: DocumentType<ComplementMain>, data: {name:string, precio: number}){
 		this.name = data.name
 		this.precio = data.precio

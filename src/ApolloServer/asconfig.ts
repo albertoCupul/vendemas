@@ -14,23 +14,30 @@ import { RuleResolver } from "../graphql/resolvers/Rules/Rule_Res";
 
 import { CategoryResolver } from "../graphql/resolvers/Products/Category/Category_Res";
 import { ComplementResolver } from "../graphql/resolvers/Products/Complements/Complement_Res";
+import { ProdAttrResolver } from "../graphql/resolvers/Products/Attributes/Prod_Attributes_Res";
+import { ProductsResolver } from "../graphql/resolvers/Products/Product/Product";
+
+import { AttributeResolver } from "../graphql/resolvers/Attributes/Attributes_Res";
 
 export async function prepareApolloServer(): Promise<ApolloServer> {
-  const apolloServer = new ApolloServer({
-    schema: await buildSchema({
-      resolvers: [
-        UserResolver,
-        LiteralResolver,
-        RuleResolver,
-        UsrAccResolver,
-        UserModulesResolver,
-        UserPerfilResolver,
-        ClientPerfilResolver,
-        ClientResolver,
-        CategoryResolver,
-        ComplementResolver
-      ],
-    }),
-  });
-  return apolloServer;
+    const apolloServer = new ApolloServer({
+        schema: await buildSchema({
+            resolvers: [
+                UserResolver,
+                LiteralResolver,
+                RuleResolver,
+                UsrAccResolver,
+                UserModulesResolver,
+                UserPerfilResolver,
+                ClientPerfilResolver,
+                ClientResolver,
+                CategoryResolver,
+                ComplementResolver,
+                AttributeResolver,
+                ProdAttrResolver,
+                ProductsResolver,
+            ],
+        }),
+    });
+    return apolloServer;
 }

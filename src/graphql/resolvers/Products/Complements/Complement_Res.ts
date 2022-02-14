@@ -1,4 +1,5 @@
 /* Aqui se declaran los resolvers (query and mutations) del servidor */
+
 import { Resolver, Query, Mutation, Arg, Args, Int } from "type-graphql";
 
 import {
@@ -30,7 +31,9 @@ export class ComplementResolver {
   }
 
   @Query((returns) => ComplementResponse)
-  async QueryComplementById(@Arg("id") id: string): Promise<ComplementResponse> {
+  async QueryComplementById(
+    @Arg("id") id: string
+  ): Promise<ComplementResponse> {
     const Complement = await ComplementModel.findById(id);
     const response: ComplementResponse = ComplementResponseFix(Complement);
     return response;
@@ -50,7 +53,7 @@ export class ComplementResolver {
     } else {
       response = {
         name: "",
-        precio: 0.00,
+        precio: 0.0,
         id: "",
       };
     }
@@ -69,7 +72,7 @@ export class ComplementResolver {
     } else {
       response = {
         name: "",
-        precio: 0.00,
+        precio: 0.0,
         id: "",
       };
     }
@@ -87,19 +90,4 @@ export class ComplementResolver {
     return response;
   }
 
-  /*@Mutation((returns) => Boolean)
-  async wz8_AddComplementMain(): Promise<Boolean> {
-    try {
-      let Complement = new ComplementModel();
-      const name = ComplementMain;
-      const existComplement = await ComplementModel.findOne({ name });
-      if (!existComplement) {
-        const editable = false;
-        await Complement.CreateUpdateComplement({ name, editable });
-      }
-      return true;
-    } catch (error) {
-      return false;
-    }
-  }*/
 }

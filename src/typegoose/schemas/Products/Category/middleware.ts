@@ -1,4 +1,4 @@
-import {CategoryResponse} from './categorySchema'
+import {CategoryResponse, CategoryModel} from './categorySchema'
 
 export function CategoryResponseFix (rule) {
     const data = rule.toObject()
@@ -22,4 +22,11 @@ export function CategoryResponseFix (rule) {
       })
     })
     return arrayCategory
+  }
+
+  export async function existCategoryInDB(id){
+    let response : boolean = false
+    const existCat = await CategoryModel.findById(id)
+    if (existCat) response = true
+    return response
   }
