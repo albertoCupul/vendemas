@@ -9,7 +9,6 @@ import {
 } from "../../../../typegoose/schemas/Products/Inventory/Inventory_schema";
 
 import {
-    //InventoryArrayResponseFix,
     InventoryResponseFix,
 } from "../../../../typegoose/schemas/Products/Inventory/middleware";
 
