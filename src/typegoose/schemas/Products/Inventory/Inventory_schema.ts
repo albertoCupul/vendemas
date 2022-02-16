@@ -2,12 +2,16 @@ import {getModelForClass, prop, Ref, modelOptions, QueryMethod, DocumentType} fr
 import {ObjectType, Field, ArgsType, Float} from 'type-graphql'
 
 @ObjectType()
-@modelOptions({ schemaOptions: { collection: 'Products.Attributes' } })
+@modelOptions({ schemaOptions: { collection: 'Products.Inventory' } })
 export class InventoryBase{
 	
 	@Field({description: 'Requerido'})
 	@prop({required:true, default:false})
 	public manage: boolean
+
+	@Field({description: 'Requerido'})
+	@prop({required:true})
+	public min: number
 
 	@Field({description: 'Requerido'})
 	@prop({required:true})
@@ -27,19 +31,18 @@ export class InventoryBase{
 @ArgsType()
 export class InputInventory implements Partial<InventoryBase> {
 	@Field({description: 'Requerido'})
-	@prop({required:true, default:false})
 	public manage: boolean
 
 	@Field({description: 'Requerido'})
-	@prop({required:true})
+	public min: number
+
+	@Field({description: 'Requerido'})
 	public quantity: number
 
 	@Field({description: 'Requerido'})
-	@prop({required:true})
 	public width: number
 
 	@Field({description: 'Requerido'})
-	@prop({required:true})
 	public heigth: number
 }
 
@@ -52,8 +55,12 @@ export class UpdateInventory extends InputInventory{
 @ObjectType()
 export class InventoryMain extends InventoryBase{	
 	
+	@Field({description:'Requerido'})
+	public _id: string
+
 	public async CreateUpdateInventory (this: DocumentType<InventoryMain>, data:InputInventory){
 		this.manage = data.manage
+		this.min = data.min
 		this.quantity = data.quantity
 		this.width = data.width
 		this.heigth = data.heigth
@@ -70,8 +77,6 @@ export class InventoryResponse extends InventoryBase{
 	@Field()
 	public id : string
 
-	/*@Field({ nullable: true })
-	public attributeId?: AttributeMain*/
 }
 
 export const InventoryModel = getModelForClass<typeof InventoryMain>(InventoryMain)

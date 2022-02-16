@@ -1,5 +1,6 @@
 import { ProductsResponse } from "./Product_schema";
 import { ProdAttrModel } from "../../Products/Attributes/prodAttributes_Schema";
+import {SellUnityModel} from "../SellUnity/SellUnity_schema"
 
 export async function ProductsResponseFix(data): Promise<ProductsResponse> {
     let response: ProductsResponse;
@@ -9,6 +10,7 @@ export async function ProductsResponseFix(data): Promise<ProductsResponse> {
         );
     });
     const atributesId = await Promise.all(arrayAttr);
+    const SellUnity = await SellUnityModel.findById(data.sellUnityId)
 
     response = {
         id: data._id.valueOf(),
@@ -19,6 +21,7 @@ export async function ProductsResponseFix(data): Promise<ProductsResponse> {
         categoryId: data.categoryId,
         atributesId: atributesId,
         complementsId: data.complementsId,
+        sellUnityId: SellUnity
     };
     return response;
 }
@@ -31,7 +34,8 @@ export async function ProductsArrayResponseFix(data) {
             );
         });
         const atributesId = await Promise.all(arrayAttr);
-        
+        const SellUnity = await SellUnityModel.findById(data.sellUnityId)
+        console.log(SellUnity)
         return {
             id: elemento._id.valueOf(),
             name: elemento.name,
@@ -41,6 +45,7 @@ export async function ProductsArrayResponseFix(data) {
             categoryId: elemento.categoryId,
             atributesId: atributesId,
             complementsId: elemento.complementsId,
+            sellUnityId: SellUnity
         };
     });
     return arrayProducts;

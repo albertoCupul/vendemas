@@ -103,3 +103,22 @@ export const ClienteGeneral = {
 /****** ---------------------------------------------*******/
 
 export const categoryMain = "Sin categoría"
+
+
+/****** ---------------------------------------------*******/
+/****** --- SellUnity (Unidades de venta) de Productos  --*******/
+/****** ---------------------------------------------*******/
+export const DefaultSellUnity =[
+  {name:"Servicio", SATKey: "E48"},
+  {name:"Pieza", SATKey: "H87"},
+  {name:"Kilogramo", SATKey: "KGM"},
+  {name:"Metro", SATKey: "MTR"},
+  {name:"Metro Cuadrado", SATKey: "MTK"},
+  {name:"Elemento", SATKey: "EA"},
+  {name:"Actividad", SATKey: "ACT"},
+  {name:"Litro", SATKey: "LTR"},
+  {name:"Hora", SATKey: "HUR"},
+  {name:"Trabajo", SATKey: "E51"},
+  {name:"Día", SATKey: "DAY"},
+  {name:"Viaje", SATKey: "E58"},
+]

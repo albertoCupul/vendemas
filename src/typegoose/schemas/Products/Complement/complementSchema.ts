@@ -32,7 +32,9 @@ export class UpdateComplement extends InputComplement{
 
 @ObjectType()
 export class ComplementMain extends ComplementBase{
-
+	
+	@Field({description:'Requerido'})
+	public _id: string
 
 	public async CreateUpdateComplement (this: DocumentType<ComplementMain>, data: {name:string, precio: number}){
 		this.name = data.name

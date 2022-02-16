@@ -65,9 +65,10 @@ export class ProductsResolver {
                 sku: "",
                 precioCosto: 0.0,
                 precioVenta: 0.0,
-                categoryId: "",
+                categoryId: null,
                 atributesId: [null],
                 complementsId: [null],
+                sellUnityId:null
             };
         }
 
@@ -98,9 +99,10 @@ export class ProductsResolver {
                 sku: "",
                 precioCosto: 0.0,
                 precioVenta: 0.0,
-                categoryId: "",
+                categoryId: null,
                 atributesId: [null],
                 complementsId: [null],
+                sellUnityId:null
             };
         }
         return response;

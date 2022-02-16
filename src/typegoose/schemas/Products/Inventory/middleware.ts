@@ -1,12 +1,11 @@
-import { InventoryResponse } from "./Inventory";
+import { InventoryResponse } from "./Inventory_schema";
 
 export function InventoryResponseFix(data) {
-  //const data = rule.toObject()
   let response: InventoryResponse;
   response = {
-    //attributeId : data.attributeId,
     id: data._id.valueOf(),
     manage: data.manage,
+    min: data.min,
     quantity: data.quantity,
     width: data.width,
     heigth: data.heigth,
@@ -14,7 +13,7 @@ export function InventoryResponseFix(data) {
   return response;
 }
 
-export function InventoryArrayResponseFix(data) {
+/*export function InventoryArrayResponseFix(data) {
   const arrayInventory: Array<InventoryResponse> = [];
   data.forEach((elemento) => {
     arrayInventory.push({
@@ -26,4 +25,4 @@ export function InventoryArrayResponseFix(data) {
     });
   });
   return arrayInventory;
-}
+}*/

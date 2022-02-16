@@ -1,5 +1,4 @@
-* Crear inventario de productos
-
+* Asociar invenatario a producto
 
 
 --------******* Archivos pendientes de finalizar y que no se van a usar aún ******--------

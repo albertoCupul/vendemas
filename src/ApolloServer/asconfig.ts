@@ -18,6 +18,8 @@ import { ProdAttrResolver } from "../graphql/resolvers/Products/Attributes/Prod_
 import { ProductsResolver } from "../graphql/resolvers/Products/Product/Product";
 
 import { AttributeResolver } from "../graphql/resolvers/Attributes/Attributes_Res";
+import { SellUnityResolver } from "../graphql/resolvers/Products/SellUnity/SellUnity_Res";
+import { InventoryResolver } from "../graphql/resolvers/Products/Inventory/Inventory_Res";
 
 export async function prepareApolloServer(): Promise<ApolloServer> {
     const apolloServer = new ApolloServer({
@@ -36,6 +38,8 @@ export async function prepareApolloServer(): Promise<ApolloServer> {
                 AttributeResolver,
                 ProdAttrResolver,
                 ProductsResolver,
+                SellUnityResolver,
+                InventoryResolver
             ],
         }),
     });

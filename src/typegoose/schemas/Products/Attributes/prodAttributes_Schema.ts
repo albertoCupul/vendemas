@@ -29,12 +29,16 @@ export class UpdateProdAttr extends InputProdAttr{
 
 @ObjectType()
 export class ProdAttrMain extends ProdAttrBase{
+	
+	@Field({description:'Requerido'})
+	public _id: string
 
 	@Field(type => AttributeMain)
 	@prop({ref:() => AttributeMain})
 	public attributeId: string
 	
-	public async CreateUpdateProdAttr (this: DocumentType<ProdAttrMain>, data: {attributeId:string, value: string}){
+	public async CreateUpdateProdAttr (this: DocumentType<ProdAttrMain>, data: {attributeId:string, value: string}){		 
+
 		this.attributeId = data.attributeId
 		this.value = data.value
 		await this.save()

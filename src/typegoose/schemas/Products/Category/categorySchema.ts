@@ -29,6 +29,9 @@ export class UpdateCategory extends InputCategory{
 @ObjectType()
 export class CategoryMain extends CategoryBase{
 	
+	@Field({description:'Requerido'})
+	public _id: string
+
 	public async CreateUpdateCategory (this: DocumentType<CategoryMain>, data: {name:string, editable: boolean}){
 		this.name = data.name
 		this.editable = data.editable

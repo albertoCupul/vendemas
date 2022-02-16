@@ -27,6 +27,9 @@ export class UpdateAttribute extends InputAttribute{
 @ObjectType()
 export class AttributeMain extends AttributeBase{
 	
+	@Field({description:'Requerido'})
+	public _id: string
+
 	public async CreateUpdateAttribute (this: DocumentType<AttributeMain>, name:string){
 		this.name = name
 		await this.save()

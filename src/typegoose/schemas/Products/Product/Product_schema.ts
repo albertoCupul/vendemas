@@ -6,20 +6,24 @@ import {
     QueryMethod,
     DocumentType,
 } from "@typegoose/typegoose";
+
 import { ObjectType, Field, ArgsType, Float } from "type-graphql";
 
 import { CategoryMain, CategoryModel } from "../Category/categorySchema";
+
 import { existCategoryInDB } from "../Category/middleware";
 
 import {
     ComplementMain,
     ComplementModel,
 } from "../Complement/complementSchema";
+
 import {
     ProdAttrMain,
     ProdAttrModel,
 } from "../Attributes/prodAttributes_Schema";
-import { existProdAttrInDB } from "../Attributes/middleware";
+
+import { SellUnityModel, SellUnityMain } from "../SellUnity/SellUnity_schema";
 
 @ObjectType()
 @modelOptions({ schemaOptions: { collection: "Products.Products" } })
@@ -40,9 +44,9 @@ export class ProductsBase {
     @prop({ required: true })
     public precioVenta: number;
 
-    @Field((type) => CategoryMain)
+    @Field((type) => CategoryMain, {nullable:true})
     @prop({ ref: () => CategoryMain })
-    public categoryId: string;
+    public categoryId: CategoryMain;
 
     @Field((type) => [ProdAttrMain])
     @prop({ ref: () => ProdAttrMain })
@@ -51,6 +55,10 @@ export class ProductsBase {
     @Field((type) => [ComplementMain])
     @prop({ ref: () => ComplementMain })
     public complementsId: Ref<ComplementMain>[];
+
+    @Field((type) => SellUnityMain, {nullable:true})
+    @prop({ ref: () => SellUnityMain })
+    public sellUnityId: SellUnityMain;
 }
 
 @ArgsType()
@@ -68,13 +76,16 @@ export class InputProducts implements Partial<ProductsBase> {
     public precioVenta: number;
 
     @Field({ description: "Requerido" })
-    public categoryId: string;
+    public category: string;
 
     @Field((type) => [String])
     public atributes: Array<string>;
 
     @Field((type) => [String])
     public complements: Array<string>;
+
+    @Field((type) => String)
+    public sellUnity: string;
 }
 
 @ArgsType()
@@ -97,22 +108,25 @@ export class ProductsMain extends ProductsBase {
             return await ComplementModel.findById(id);
         });
 
-        const existCategory = await CategoryModel.findById(data.categoryId);
+        const existCategory = await CategoryModel.findById(data.category);
+
+        const existSellUnity = await SellUnityModel.findById(data.sellUnity)
 
         const atributesId = await Promise.all(arrayAttr);
         const complementsId = await Promise.all(arrayCompl);
 
         const existNullAtributes = atributesId.includes(null);
-        const existNullComplements = complementsId.includes(null);
+        const existNullComplements = complementsId.includes(null);        
 
-        if (!existNullAtributes && !existNullComplements && existCategory) {
+        if (!existNullAtributes && !existNullComplements && existCategory && existSellUnity) {
             this.name = data.name;
             this.sku = data.sku;
             this.precioVenta = data.precioVenta;
             this.precioCosto = data.precioCosto;
-            this.categoryId = data.categoryId;
+            this.categoryId = existCategory;
             this.atributesId = atributesId;
             this.complementsId = complementsId;
+            this.sellUnityId = existSellUnity
             await this.save();
         }
     }
