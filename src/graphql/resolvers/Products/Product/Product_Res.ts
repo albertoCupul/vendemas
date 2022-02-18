@@ -24,7 +24,8 @@ export class ProductsResolver {
         })
             .populate("categoryId")
             .populate("atributesId")
-            .populate("complementsId");        
+            .populate("complementsId")
+            .populate("OffersId")       
         const response: Array<ProductsResponse> =
             await ProductsArrayResponseFix(Product);
         return response;
@@ -35,7 +36,8 @@ export class ProductsResolver {
         const Product = await ProductsModel.findById(id)
             .populate("categoryId")
             .populate("atributesId")
-            .populate("complementsId");
+            .populate("complementsId")
+            .populate("OffersId")
         const response: ProductsResponse = await ProductsResponseFix(Product);
         return response;
     }
@@ -53,7 +55,8 @@ export class ProductsResolver {
             Products = await ProductsModel.findById(Products._id.valueOf())
                 .populate("categoryId")
                 .populate("atributesId")
-                .populate("complementsId");
+                .populate("complementsId")
+                .populate("OffersId")
             if (Products) {
                 response = await ProductsResponseFix(Products);
                 productCreated = true;
@@ -68,7 +71,9 @@ export class ProductsResolver {
                 categoryId: null,
                 atributesId: [null],
                 complementsId: [null],
-                sellUnityId:null
+                sellUnityId:null,
+                inventoryId: null,
+                OffersId:[null]
             };
         }
 
@@ -91,7 +96,8 @@ export class ProductsResolver {
             Products = await ProductsModel.findById(data.id.valueOf())
                 .populate("categoryId")
                 .populate("atributesId")
-                .populate("complementsId");
+                .populate("complementsId")
+                .populate("OffersId")
             response = await ProductsResponseFix(Products);
         } else {
             response = {
@@ -102,7 +108,9 @@ export class ProductsResolver {
                 categoryId: null,
                 atributesId: [null],
                 complementsId: [null],
-                sellUnityId:null
+                sellUnityId:null,
+                inventoryId: null,
+                OffersId: [null]
             };
         }
         return response;

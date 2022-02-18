@@ -1,4 +1,16 @@
-* Asociar invenatario a producto
+* Crear tabla de formas de pago
+* Crear Pagos
+* Crear estados de venta (Cotizado, vendido, pendiente de pago, entregado)
+*** definir status predeterminado con wizard
+* Crear renta
+* Crear Negocio
+* Crear tipos de papel de impresion
+* Crear Ticket
+* Crear Sucursales
+* Crear detalle de venta
+* Crear costo de servicio a domicilio
+* Crear venta
+* CRear devoluciones
 
 
 --------******* Archivos pendientes de finalizar y que no se van a usar aún ******--------

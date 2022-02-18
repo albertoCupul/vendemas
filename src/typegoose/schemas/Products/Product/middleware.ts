@@ -1,6 +1,8 @@
 import { ProductsResponse } from "./Product_schema";
 import { ProdAttrModel } from "../../Products/Attributes/prodAttributes_Schema";
 import {SellUnityModel} from "../SellUnity/SellUnity_schema"
+import { InventoryModel } from "../Inventory/Inventory_schema";
+import { OffersModel } from "../offers/offers_schema";
 
 export async function ProductsResponseFix(data): Promise<ProductsResponse> {
     let response: ProductsResponse;
@@ -9,8 +11,10 @@ export async function ProductsResponseFix(data): Promise<ProductsResponse> {
             "attributeId"
         );
     });
+    
     const atributesId = await Promise.all(arrayAttr);
     const SellUnity = await SellUnityModel.findById(data.sellUnityId)
+    const Inventory = await InventoryModel.findById(data.inventoryId)
 
     response = {
         id: data._id.valueOf(),
@@ -21,7 +25,9 @@ export async function ProductsResponseFix(data): Promise<ProductsResponse> {
         categoryId: data.categoryId,
         atributesId: atributesId,
         complementsId: data.complementsId,
-        sellUnityId: SellUnity
+        sellUnityId: SellUnity,
+        inventoryId: Inventory,
+        OffersId: data.OffersId
     };
     return response;
 }
@@ -35,7 +41,8 @@ export async function ProductsArrayResponseFix(data) {
         });
         const atributesId = await Promise.all(arrayAttr);
         const SellUnity = await SellUnityModel.findById(data.sellUnityId)
-        console.log(SellUnity)
+        const Inventory = await InventoryModel.findById(data.inventoryId)
+
         return {
             id: elemento._id.valueOf(),
             name: elemento.name,
@@ -45,7 +52,9 @@ export async function ProductsArrayResponseFix(data) {
             categoryId: elemento.categoryId,
             atributesId: atributesId,
             complementsId: elemento.complementsId,
-            sellUnityId: SellUnity
+            sellUnityId: SellUnity,
+            inventoryId: Inventory,
+            OffersId: elemento.OffersId
         };
     });
     return arrayProducts;

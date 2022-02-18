@@ -23,7 +23,10 @@ import {
     ProdAttrModel,
 } from "../Attributes/prodAttributes_Schema";
 
+import { InventoryModel, InventoryMain } from "../Inventory/Inventory_schema";
+
 import { SellUnityModel, SellUnityMain } from "../SellUnity/SellUnity_schema";
+import { OffersMain, OffersModel } from "../offers/offers_schema";
 
 @ObjectType()
 @modelOptions({ schemaOptions: { collection: "Products.Products" } })
@@ -44,7 +47,7 @@ export class ProductsBase {
     @prop({ required: true })
     public precioVenta: number;
 
-    @Field((type) => CategoryMain, {nullable:true})
+    @Field((type) => CategoryMain, { nullable: true })
     @prop({ ref: () => CategoryMain })
     public categoryId: CategoryMain;
 
@@ -56,9 +59,17 @@ export class ProductsBase {
     @prop({ ref: () => ComplementMain })
     public complementsId: Ref<ComplementMain>[];
 
-    @Field((type) => SellUnityMain, {nullable:true})
+    @Field((type) => [OffersMain])
+    @prop({ ref: () => OffersMain, required:false })
+    public OffersId: Ref<OffersMain>[];
+
+    @Field((type) => SellUnityMain, { nullable: true })
     @prop({ ref: () => SellUnityMain })
     public sellUnityId: SellUnityMain;
+
+    @Field((type) => InventoryMain, { nullable: true })
+    @prop({ ref: () => InventoryMain })
+    public inventoryId: InventoryMain;
 }
 
 @ArgsType()
@@ -86,6 +97,12 @@ export class InputProducts implements Partial<ProductsBase> {
 
     @Field((type) => String)
     public sellUnity: string;
+
+    @Field((type) => String)
+    public inventory: string;
+
+    @Field((type) => [String])
+    public Offers: Array<string>;
 }
 
 @ArgsType()
@@ -101,24 +118,47 @@ export class ProductsMain extends ProductsBase {
         data: InputProducts
     ) {
         const arrayAttr = data.atributes.map(async (id) => {
-            return await ProdAttrModel.findById(id);
+            if (id){
+                return await ProdAttrModel.findById(id);
+            }
         });
 
         const arrayCompl = data.complements.map(async (id) => {
-            return await ComplementModel.findById(id);
+            if (id){
+                return await ComplementModel.findById(id);
+            }
         });
+        
+        const arrayOffers = data.Offers.map(async (id) => {
+            if (id){
+                return await OffersModel.findById(id);
+            }
+        });
+
+        console.log(arrayOffers)
 
         const existCategory = await CategoryModel.findById(data.category);
 
-        const existSellUnity = await SellUnityModel.findById(data.sellUnity)
+        const existSellUnity = await SellUnityModel.findById(data.sellUnity);
+
+        const existInventory = await InventoryModel.findById(data.inventory);
 
         const atributesId = await Promise.all(arrayAttr);
         const complementsId = await Promise.all(arrayCompl);
+        const offersId = await Promise.all(arrayOffers);
 
         const existNullAtributes = atributesId.includes(null);
-        const existNullComplements = complementsId.includes(null);        
+        const existNullComplements = complementsId.includes(null);
+        const existNullOffers = offersId.includes(null);
 
-        if (!existNullAtributes && !existNullComplements && existCategory && existSellUnity) {
+        if (
+            !existNullAtributes &&
+            !existNullComplements &&
+            !existNullOffers &&
+            existCategory &&
+            existSellUnity &&
+            existInventory
+        ) {
             this.name = data.name;
             this.sku = data.sku;
             this.precioVenta = data.precioVenta;
@@ -126,7 +166,9 @@ export class ProductsMain extends ProductsBase {
             this.categoryId = existCategory;
             this.atributesId = atributesId;
             this.complementsId = complementsId;
-            this.sellUnityId = existSellUnity
+            this.sellUnityId = existSellUnity;
+            this.inventoryId = existInventory
+            this.OffersId = offersId
             await this.save();
         }
     }
@@ -141,8 +183,6 @@ export class ProductsResponse extends ProductsBase {
     @Field()
     public id?: string;
 
-    /*@Field({ nullable: true })
-	public attributeId?: AttributeMain*/
 }
 
 export const ProductsModel =

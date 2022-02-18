@@ -15,11 +15,12 @@ import { RuleResolver } from "../graphql/resolvers/Rules/Rule_Res";
 import { CategoryResolver } from "../graphql/resolvers/Products/Category/Category_Res";
 import { ComplementResolver } from "../graphql/resolvers/Products/Complements/Complement_Res";
 import { ProdAttrResolver } from "../graphql/resolvers/Products/Attributes/Prod_Attributes_Res";
-import { ProductsResolver } from "../graphql/resolvers/Products/Product/Product";
+import { ProductsResolver } from "../graphql/resolvers/Products/Product/Product_Res";
 
 import { AttributeResolver } from "../graphql/resolvers/Attributes/Attributes_Res";
 import { SellUnityResolver } from "../graphql/resolvers/Products/SellUnity/SellUnity_Res";
 import { InventoryResolver } from "../graphql/resolvers/Products/Inventory/Inventory_Res";
+import { OffersResolver } from "../graphql/resolvers/Products/Offers/Offers_Res";
 
 export async function prepareApolloServer(): Promise<ApolloServer> {
     const apolloServer = new ApolloServer({
@@ -39,7 +40,8 @@ export async function prepareApolloServer(): Promise<ApolloServer> {
                 ProdAttrResolver,
                 ProductsResolver,
                 SellUnityResolver,
-                InventoryResolver
+                InventoryResolver,
+                OffersResolver
             ],
         }),
     });
